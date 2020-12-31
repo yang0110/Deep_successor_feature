@@ -39,14 +39,14 @@ epi_num = 1000
 
 max_step = 100
 emb_dim = 10
-learning_rate = 0.001
+learning_rate = 0.1
 buffer_size = 2000
 batch_size = 64
 beta = 1
 loop_num = 1
 
 
-dsr = DSR_2(env, size, state_num, beta, gamma, epsilon, epi_num, max_step, learning_rate, buffer_size, batch_size, emb_dim, dsr_matrix=None)
+dsr = DSR(env, size, state_num, beta, gamma, epsilon, epi_num, max_step, learning_rate, buffer_size, batch_size, emb_dim, dsr_matrix=None)
 dsr_epi_total_reward, dsr_embedding, dsr_state_count, dsr_reward_loss, dsr_sr_loss = dsr.run()
 
 plt.figure(figsize=(6,4))
