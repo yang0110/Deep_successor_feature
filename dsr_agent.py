@@ -34,7 +34,6 @@ class DSR:
 		self.epi_step_num = []
 		self.epi = 0
 		self.state_count = np.zeros(self.state_num)
-		self.state_neighbors = {i: [] for i in range(self.state_num)}
 		self.reward_loss_list = []
 		self.sr_loss_list = []
 		self.init_net()
@@ -43,7 +42,6 @@ class DSR:
 	def _reset(self):
 		self.env.reset()
 		self.state = self.size*self.size*self.env.agent_dir + (self.env.agent_pos[1]-1)*self.size+(self.env.agent_pos[0]-1)
-		# self.state_neighbors = {i: [] for i in range(self.state_num)}
 		self.done = False
 		self.total_reward = 0.0 
 		self.step_num = 0 
@@ -72,9 +70,6 @@ class DSR:
 		self.total_reward += reward 
 		self.step_num += 1
 		self.state_count[self.state] += 1
-		# self.state_neighbors[self.state].append(next_state)
-		# self.state_neighbors[self.state] = np.unique(self.state_neighbors[self.state]).tolist()
-		# reward += self.beta*(1/(np.sqrt(self.state_count[next_state]+1)*np.sqrt(len(self.state_neighbors[next_state])+1)))
 		exp = Experience(self.state, action, reward, self.done, next_state)
 		self.buffer.append(exp)
 		self.state = next_state
